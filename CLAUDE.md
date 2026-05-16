@@ -55,6 +55,17 @@ Bash helpers for the QC REST API; the lean CLI has no command to show a past clo
 
 Add new helpers (list backtests, fetch orders, fetch equity curve) by sourcing `_common.sh` and calling `qc_api`.
 
+## Shared code across QC cloud projects (Option A: manual copy)
+`lean cloud push --project X` only uploads files inside `X/`. Sibling dirs like `analysis/` are invisible to cloud. Convention for this repo:
+
+- **`analysis/ic_calculator.py` is the single source of truth.** Edit it here, run unit-tests / smoke-tests against it locally.
+- **When a notebook or strategy needs IC tooling on QC cloud, copy `analysis/ic_calculator.py` into that project directory** before `lean cloud push`. The copy lives alongside `main.py` / the .ipynb. Import as `from ic_calculator import ...` (no `analysis.` prefix because it's flat in the project root).
+- After editing the canonical file in `analysis/`, re-copy into every project that has a stale copy. There's no auto-sync — keep the consumer list short.
+- For research notebooks that run **purely locally** (Jupyter on the host, no Docker, no QuantBook), no copy is needed — `sys.path.insert(0, '..')` lets the notebook import directly from `analysis/`. See `research/01_data_exploration.ipynb` cells for the pattern.
+
+## Local execution does NOT require Docker
+Only LEAN-engine commands (`lean backtest`, `lean research`) need Docker. Plain `python script.py` or `jupyter lab` against this repo runs with zero Docker dependency. The DinD issue only matters for the LEAN engine path; pure-Python factor analysis using `analysis/ic_calculator.py` + cached data is unaffected. `QuantBook` (QC's data API) only works inside the LEAN runtime — so notebooks that use `QuantBook` must run on QC cloud (web UI or `lean research`), while notebooks using a non-QC data source (yfinance, locally cached parquet) can run as plain Jupyter.
+
 ## External data access in algorithms
 Cloud algorithms cannot use `requests` / `urllib` — QC blocks them. Use `self.download(url)` (rate-limited, ~100 calls/backtest, fails silently) or define a `PythonData` subclass with `GetSource()` + `Reader()`. Local LEAN has no such restriction but local execution is blocked — see above.
 
