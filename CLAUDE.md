@@ -11,7 +11,6 @@ strategies/comboN_*/      # Each is a LEAN project (main.py + config.json)
 analysis/                 # Pure-python factor tooling (no LEAN deps)
 reports/                  # Markdown reports + figures
 scripts/                  # QC REST API helpers (bt_show.sh etc.)
-Sample Strategy/          # Original lean-init scaffold; reference only
 data/                     # Sample dataset, gitignored (~226MB, regenerable)
 lean.json                 # Engine config
 ```
