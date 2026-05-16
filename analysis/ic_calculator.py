@@ -141,3 +141,41 @@ def _forward_return(per_bar_returns: pd.Series, n: int) -> pd.Series:
     if n == 1:
         return per_bar_returns.shift(-1)
     return (1 + per_bar_returns).rolling(n).apply(np.prod, raw=True).shift(-n) - 1
+
+
+def intraday_forwards(
+    prices: pd.Series,
+    periods: Iterable[int],
+) -> dict[int, pd.Series]:
+    """For each period n, return ``prices[t+n] / prices[t] - 1`` with rows
+    masked to NaN when bar ``t+n`` falls on a different calendar date than ``t``.
+
+    Use this when overnight gaps would contaminate the signal — e.g. testing
+    whether VWAP deviation mean-reverts within the session, separate from
+    overnight drift.
+    """
+    dates = pd.Series(prices.index.normalize(), index=prices.index)
+    out: dict[int, pd.Series] = {}
+    for n in periods:
+        future_p = prices.shift(-n)
+        future_d = dates.shift(-n)
+        same_day = (dates.values == future_d.values)
+        out[n] = ((future_p / prices) - 1).where(same_day, np.nan)
+    return out
+
+
+def compute_ic_from_forwards(
+    indicator: pd.Series,
+    forwards: dict[int, pd.Series],
+) -> dict[int, ICResult]:
+    """IC against pre-computed forward returns. Use when forwards need custom
+    logic (e.g., intraday-only via :func:`intraday_forwards`)."""
+    out: dict[int, ICResult] = {}
+    for n, future in forwards.items():
+        df = pd.concat([indicator.rename("ind"), future.rename("fr")], axis=1).dropna()
+        if len(df) < 30:
+            out[n] = ICResult(n, float("nan"), 1.0, len(df))
+            continue
+        corr, pval = stats.spearmanr(df["ind"], df["fr"])
+        out[n] = ICResult(n, float(corr), float(pval), len(df))
+    return out
