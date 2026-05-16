@@ -1,0 +1,7 @@
+{
+    "algorithm-language": "Python",
+    "description": "Reference benchmark. Dollar-cost averaging into SPY. 100k initial cash invested in equal monthly slices over 77 months.",
+    "parameters": {},
+    "organization-id": "07e0c4d5ced06492032a59b6a2511ef1",
+    "cloud-id": 31735368
+}

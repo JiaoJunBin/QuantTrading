@@ -1,0 +1,7 @@
+{
+    "algorithm-language": "Python",
+    "description": "Phase 3E time-series momentum on 6 ETFs per Moskowitz Ooi Pedersen 2012. Per-asset long-or-cash decision based on own 12-1 momentum. Equal weight 1 over N on each positive-momentum asset. Cash otherwise. Monthly rebalance.",
+    "parameters": {},
+    "organization-id": "07e0c4d5ced06492032a59b6a2511ef1",
+    "cloud-id": 31736200
+}

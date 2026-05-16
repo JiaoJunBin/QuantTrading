@@ -1,0 +1,10 @@
+{
+    "algorithm-language": "Python",
+    "description": "Phase 3D daily cross-sectional momentum on 6 ETFs SPY QQQ IWM EFA TLT GLD. Long top 2 by Jegadeesh-Titman 12-1 momentum. Short bottom 2. Equal weight inside sleeves. Monthly rebalance. Approximately dollar-neutral.",
+    "parameters": {
+        "long_n": "2",
+        "short_n": "2"
+    },
+    "organization-id": "07e0c4d5ced06492032a59b6a2511ef1",
+    "cloud-id": 31734734
+}

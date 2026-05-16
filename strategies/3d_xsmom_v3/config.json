@@ -1,0 +1,11 @@
+{
+    "algorithm-language": "Python",
+    "description": "Phase 3D v3 long-only cross-asset momentum on 11 ETFs with vol targeting. Universe US equity styles international rates credit gold commodities REITs. Long top 3 by 12-1 momentum among those with positive momentum. Gross exposure scaled to target 15 percent vol capped at 1.5x leverage.",
+    "parameters": {
+        "long_n": "3",
+        "target_vol": "0.15",
+        "leverage_cap": "1.5"
+    },
+    "organization-id": "07e0c4d5ced06492032a59b6a2511ef1",
+    "cloud-id": 31735043
+}

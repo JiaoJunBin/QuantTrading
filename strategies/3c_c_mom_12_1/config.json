@@ -1,0 +1,12 @@
+{
+    "algorithm-language": "Python",
+    "description": "Phase 3C-C daily. Long when Jegadeesh-Titman 12-1 momentum on SPY is in top rolling quantile. Short when in bottom. 63-day hold. Only price-based signal that stayed momentum at daily horizon.",
+    "parameters": {
+        "quantile_pct": "0.20",
+        "quantile_window": "126",
+        "holding_days": "63",
+        "atr_stop": "4.0"
+    },
+    "organization-id": "07e0c4d5ced06492032a59b6a2511ef1",
+    "cloud-id": 31734143
+}

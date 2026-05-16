@@ -1,0 +1,10 @@
+{
+    "algorithm-language": "Python",
+    "description": "Reference benchmark. SPY buy and hold with monthly deposit additions. Starts with starting_cash invested in SPY then adds monthly_deposit at each month start which is immediately invested.",
+    "parameters": {
+        "starting_cash": "20000",
+        "monthly_deposit": "3000"
+    },
+    "organization-id": "07e0c4d5ced06492032a59b6a2511ef1",
+    "cloud-id": 31735770
+}

@@ -1,0 +1,13 @@
+{
+    "algorithm-language": "Python",
+    "description": "Phase 3C-D daily. Long-only. Buy SPY when 20-day annualized realized vol is in top rolling quantile. 21-day hold. Captures vol risk premium. Phase 2C IC of plus 0.144 at 21d horizon stable across bull and range regimes.",
+    "parameters": {
+        "quantile_pct": "0.20",
+        "quantile_window": "126",
+        "holding_days": "21",
+        "vol_period": "20",
+        "atr_stop": "3.0"
+    },
+    "organization-id": "07e0c4d5ced06492032a59b6a2511ef1",
+    "cloud-id": 31734145
+}

@@ -1,0 +1,9 @@
+{
+    "algorithm-language": "Python",
+    "description": "Phase 3D v2 long-only cross-asset momentum rotation. 6 ETFs SPY QQQ IWM EFA TLT GLD. Long top 2 by 12-1 momentum among those with positive momentum. Cash if none qualify. Monthly rebalance. Antonacci Dual Momentum style.",
+    "parameters": {
+        "long_n": "2"
+    },
+    "organization-id": "07e0c4d5ced06492032a59b6a2511ef1",
+    "cloud-id": 31734799
+}
