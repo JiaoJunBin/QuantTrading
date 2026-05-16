@@ -10,7 +10,6 @@ Personal quant research workspace built on the [QuantConnect LEAN CLI](https://w
 ├── research/              # QuantBook notebooks (run on QC cloud research)
 ├── strategies/            # One LEAN project per strategy combo
 ├── analysis/              # Shared factor tooling (pure pandas/scipy)
-├── reports/               # Markdown reports + figures
 ├── scripts/               # QC REST API helpers
 ├── lean.json              # LEAN engine config
 ├── data/                  # Sample dataset (gitignored, ~226MB)
