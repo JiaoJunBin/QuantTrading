@@ -25,10 +25,8 @@ class Combo3D_XSMom_V2(QCAlgorithm):
       Rebalance  monthly first trading day
     """
 
-    UNIVERSE = ["SPY", "QQQ", "EFA", "TLT", "GLD",
-                "VWO", "HYG", "VNQ", "IEF", "DBC", "SOXX"]
-    LONG_N = 4
-    RANK_WEIGHTS = [4.0, 3.0, 2.0, 1.0]   # 40 30 20 10 percent
+    BASE_UNIVERSE = ["SPY", "QQQ", "EFA", "TLT", "GLD",
+                     "VWO", "HYG", "VNQ", "IEF", "DBC", "SOXX"]
 
     def initialize(self):
         # Date range — overridable for IS/OOS splits
@@ -43,8 +41,16 @@ class Combo3D_XSMom_V2(QCAlgorithm):
         self.set_cash(starting_cash)
         self.set_brokerage_model(BrokerageName.INTERACTIVE_BROKERS_BROKERAGE, AccountType.MARGIN)
 
+        # Parameterizable knobs
+        self.long_n     = int(self.get_parameter("long_n") or 4)
+        self.weighting  = (self.get_parameter("weighting") or "rank").lower()
+        self.signal_type = (self.get_parameter("signal") or "residual_mom").lower()
+        drop_soxx       = (self.get_parameter("drop_soxx") or "0") in ("1", "true", "yes")
+
+        universe = [t for t in self.BASE_UNIVERSE if not (drop_soxx and t == "SOXX")]
+
         self.symbols = []
-        for t in self.UNIVERSE:
+        for t in universe:
             sym = self.add_equity(t, Resolution.DAILY).symbol
             self.symbols.append(sym)
             sec = self.securities[sym]
@@ -90,14 +96,30 @@ class Combo3D_XSMom_V2(QCAlgorithm):
         except (ZeroDivisionError, ValueError):
             return None
 
-    def _rank_weights(self, winners):
-        """Rank-weighted allocation. winners is list of (sym, signal) sorted descending."""
+    def _signal(self, sym):
+        ph = self.price_history[sym]
+        if not ph.is_ready:
+            return None
+        try:
+            if self.signal_type == "mom_12_1":
+                return ph[21] / ph[252] - 1
+            return self._residual_mom(sym)
+        except (ZeroDivisionError, ValueError):
+            return None
+
+    def _weights(self, winners):
+        """Allocation by self.weighting. winners is list of (sym, signal) sorted desc."""
         k = len(winners)
         if k == 0:
             return {}
-        raw = self.RANK_WEIGHTS[:k]
+        if self.weighting == "rank":
+            raw = list(range(k, 0, -1))   # [k, k-1, ..., 1]
+        elif self.weighting == "equal":
+            raw = [1.0] * k
+        else:
+            raise ValueError(f"unknown weighting: {self.weighting}")
         total = sum(raw)
-        deployed = k / self.LONG_N
+        deployed = k / self.long_n
         return {sym: (raw[i] / total) * deployed for i, (sym, _) in enumerate(winners)}
 
     def rebalance(self):
@@ -106,7 +128,7 @@ class Combo3D_XSMom_V2(QCAlgorithm):
 
         signals = {}
         for sym in self.symbols:
-            s = self._residual_mom(sym)
+            s = self._signal(sym)
             if s is not None:
                 signals[sym] = s
 
@@ -114,8 +136,8 @@ class Combo3D_XSMom_V2(QCAlgorithm):
             return
 
         positives = sorted([(s, v) for s, v in signals.items() if v > 0],
-                           key=lambda kv: -kv[1])[:self.LONG_N]
-        weights = self._rank_weights(positives)
+                           key=lambda kv: -kv[1])[:self.long_n]
+        weights = self._weights(positives)
 
         target = {sym: weights.get(sym, 0.0) for sym in self.symbols}
         for sym, w in target.items():
