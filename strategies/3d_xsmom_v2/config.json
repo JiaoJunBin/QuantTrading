@@ -1,0 +1,7 @@
+{
+    "algorithm-language": "Python",
+    "description": "Phase 3D v2 cross-asset momentum on 11 ETFs SPY QQQ EFA TLT GLD VWO HYG VNQ IEF DBC SOXX. residual_mom signal. Long top 4 by rank weighting 40 30 20 10 percent. Monthly rebalance. Hardcoded best config from local diagnostic sweep.",
+    "parameters": {},
+    "organization-id": "07e0c4d5ced06492032a59b6a2511ef1",
+    "cloud-id": 31740853
+}
