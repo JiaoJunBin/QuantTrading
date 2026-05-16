@@ -1,0 +1,14 @@
+{
+    "algorithm-language": "Python",
+    "description": "Phase 3 combo 1 pivoted from spec. Long when VWAP deviation is in the top rolling quantile and volume confirms. Intraday hold of about 1.5 hours.",
+    "parameters": {
+        "quantile_threshold": "0.80",
+        "quantile_window": "100",
+        "volume_multiplier": "1.3",
+        "atr_stop": "2.0",
+        "holding_bars": "6",
+        "skip_open_minutes": "30"
+    },
+    "organization-id": "07e0c4d5ced06492032a59b6a2511ef1",
+    "cloud-id": 31733184
+}

@@ -1,0 +1,15 @@
+{
+    "algorithm-language": "Python",
+    "description": "Phase 3 combo 5 new and data-driven. Long when CMF is in the top rolling quantile and price breaks the N-bar high. About 2h intraday hold.",
+    "parameters": {
+        "quantile_threshold": "0.80",
+        "quantile_window": "100",
+        "breakout_lookback": "8",
+        "cmf_period": "20",
+        "atr_stop": "2.0",
+        "holding_bars": "8",
+        "skip_open_minutes": "30"
+    },
+    "organization-id": "07e0c4d5ced06492032a59b6a2511ef1",
+    "cloud-id": 31733195
+}

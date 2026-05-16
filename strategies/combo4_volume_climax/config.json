@@ -1,0 +1,13 @@
+{
+    "algorithm-language": "Python",
+    "description": "Phase 3 combo 4 per spec event design. Detect 3x volume and 2x range climax with close in tail. Reverse on the next bar if no new extreme. Tight stop and short fixed hold.",
+    "parameters": {
+        "volume_climax_mult": "3.0",
+        "range_mult": "2.0",
+        "holding_bars": "4",
+        "atr_stop": "1.0",
+        "skip_open_minutes": "30"
+    },
+    "organization-id": "07e0c4d5ced06492032a59b6a2511ef1",
+    "cloud-id": 31733192
+}

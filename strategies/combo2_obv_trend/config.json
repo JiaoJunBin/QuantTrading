@@ -1,0 +1,12 @@
+{
+    "algorithm-language": "Python",
+    "description": "Phase 3 combo 2 per spec. OBV and price joint breakout with volume confirmation. Donchian-style exit. Overnight holds permitted.",
+    "parameters": {
+        "obv_lookback_in": "60",
+        "exit_lookback": "20",
+        "volume_multiplier": "1.3",
+        "atr_stop": "2.0"
+    },
+    "organization-id": "07e0c4d5ced06492032a59b6a2511ef1",
+    "cloud-id": 31733187
+}
