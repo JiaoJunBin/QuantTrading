@@ -15,8 +15,6 @@ grow unboundedly. Those are not directly comparable across time — use the
 (MFI [0,100], CMF [-1,1]) are testable directly.
 """
 
-from __future__ import annotations
-
 import numpy as np
 import pandas as pd
 
