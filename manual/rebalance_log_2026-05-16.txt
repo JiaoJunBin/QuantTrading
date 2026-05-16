@@ -1,0 +1,33 @@
+Rebalance decision @ 2026-05-16
+Strategy: U11 + residual_mom + n=4 + rank
+
+Signal table:
+            signal  rank  positive  last_price
+DBC   3.930838e-01     1      True   31.190001
+GLD   3.850051e-01     2      True  417.290009
+SOXX  2.989444e-01     3      True  508.519989
+VWO   5.584826e-02     4      True   58.439999
+IEF   4.897723e-02     5      True   93.510002
+EFA   4.643984e-02     6      True  101.720001
+TLT   3.458520e-02     7      True   83.660004
+VNQ   3.090917e-02     8      True   93.910004
+HYG   2.135175e-02     9      True   79.459999
+SPY  -4.165369e-17    10     False  739.169983
+QQQ  -1.574178e-02    11     False  708.929993
+
+Current holdings: {}
+Cash balance: $23,000.00
+Total portfolio value: $23,000.00
+
+Target weights:
+  DBC: 40.0%  (295 shares)
+  GLD: 30.0%  (17 shares)
+  SOXX: 20.0%  (9 shares)
+  VWO: 10.0%  (39 shares)
+
+Trades:
+  action ticker  current  target  delta       price       amount
+2    BUY    DBC        0     295    295   31.190001  9201.050158
+0    BUY    GLD        0      17     17  417.290009  7093.930145
+3    BUY   SOXX        0       9      9  508.519989  4576.679901
+1    BUY    VWO        0      39     39   58.439999  2279.159946
